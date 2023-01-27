@@ -48,3 +48,16 @@ extension UIView {
     }
 }
 
+extension String {
+    func getFormattedDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+        let date = dateFormatter.date(from: self) ?? Date()
+
+        let dateFormatterFinal = DateFormatter()
+        dateFormatterFinal.dateFormat = "dd/MM/yyyy - HH:mm"
+
+        return dateFormatterFinal.string(from: date) + "h"
+    }
+}

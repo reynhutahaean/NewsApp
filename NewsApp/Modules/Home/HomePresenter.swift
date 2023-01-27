@@ -27,7 +27,7 @@ class HomePresenter {
     var selectedCategory: Category?
     var searchText: String = ""
     
-    private var newsArray: [String] = [String]()
+    private var model: HomeModel?
 }
 
 extension HomePresenter: HomePresentation {
@@ -40,7 +40,7 @@ extension HomePresenter: HomePresentation {
         param["category"] = category
         view?.showLoading()
         interactor?.getNews(param: param)
-    }
+    }   
     
     func navigateToDetail(data: News) {
         var param: [String: Any] = [String: Any]()
@@ -53,15 +53,21 @@ extension HomePresenter: HomePresentation {
         router?.presentCategoryPicker(categoryName: categoryName, categoryList: categoryList)
     }
     
-    func searchNews() {
-        if (searchText.isEmpty) {
-        } else {
-            let filter = topHeadlineArray.filter {
-                $0.title?.localizedCaseInsensitiveCompare(searchText) == .orderedAscending
-            }
-            topHeadlineArray = filter
+    func searchNews(searchText: String) {
+        let unfiltered = model?.news ?? []
+        
+        let filteredNews = unfiltered.filter { news in
+            return news.title?.lowercased().contains(searchText.lowercased()) ?? true
         }
-
+        
+        if filteredNews.isEmpty && !searchText.isEmpty {
+            view?.showErrorSearch(isHidden: false)
+        } else {
+            view?.showErrorSearch(isHidden: true)
+        }
+        
+        self.topHeadlineArray = searchText.isEmpty ? unfiltered : filteredNews
+            
         view?.reloadTableView()
     }
 }
@@ -70,6 +76,7 @@ extension HomePresenter: HomeInteractorOutput {
     func successGetNews(data: [News]) {
         view?.hideLoading()
         topHeadlineArray = data
+        model = HomeModel(news: data)
         view?.reloadTableView()
     }
     

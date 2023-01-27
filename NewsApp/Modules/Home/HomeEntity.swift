@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct HomeModel {
+    var news: [News]
+}
+
 struct News: Codable {
     var id: String?
     var name: String?

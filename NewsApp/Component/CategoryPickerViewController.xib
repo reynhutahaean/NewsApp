@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -9,8 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
         </array>
     </customFonts>
     <objects>
@@ -38,16 +42,22 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MC8-bn-hfF">
                     <rect key="frame" x="22" y="263.66666666666669" width="349" height="350.00000000000006"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zk1-gM-s4x">
+                            <rect key="frame" x="16" y="20" width="317" height="24"/>
+                            <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oRo-Nd-gb3">
-                            <rect key="frame" x="16" y="15" width="317" height="50"/>
+                            <rect key="frame" x="16" y="64" width="317" height="50"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BP7-o3-ksu">
                                     <rect key="frame" x="0.0" y="0.0" width="317" height="50"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2o0-V8-EhA">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2o0-V8-EhA">
                                             <rect key="frame" x="58" y="2" width="254" height="46"/>
                                             <color key="textColor" name="Primary Black"/>
-                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                                             <connections>
                                                 <action selector="searchTextFieldEditingChanged:" destination="-1" eventType="editingChanged" id="Ueo-8s-OeA"/>
@@ -71,20 +81,23 @@
                             </subviews>
                         </stackView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LII-XQ-PUh">
-                            <rect key="frame" x="0.0" y="75" width="349" height="255"/>
+                            <rect key="frame" x="0.0" y="124" width="349" height="206"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="Zk1-gM-s4x" firstAttribute="leading" secondItem="MC8-bn-hfF" secondAttribute="leading" constant="16" id="1we-tF-PnA"/>
                         <constraint firstItem="LII-XQ-PUh" firstAttribute="top" secondItem="oRo-Nd-gb3" secondAttribute="bottom" constant="10" id="4Sf-vS-XAd"/>
+                        <constraint firstItem="Zk1-gM-s4x" firstAttribute="top" secondItem="MC8-bn-hfF" secondAttribute="top" constant="20" id="EcL-Jv-ICt"/>
+                        <constraint firstItem="oRo-Nd-gb3" firstAttribute="top" secondItem="Zk1-gM-s4x" secondAttribute="bottom" constant="20" id="FWz-BI-2Qo"/>
                         <constraint firstItem="oRo-Nd-gb3" firstAttribute="leading" secondItem="MC8-bn-hfF" secondAttribute="leading" constant="16" id="LRG-Xu-oQL"/>
                         <constraint firstAttribute="trailing" secondItem="oRo-Nd-gb3" secondAttribute="trailing" constant="16" id="Ox0-Du-Dsf"/>
                         <constraint firstAttribute="height" constant="350" id="Pbe-12-42k"/>
                         <constraint firstItem="LII-XQ-PUh" firstAttribute="leading" secondItem="MC8-bn-hfF" secondAttribute="leading" id="aWu-cM-ZIv"/>
-                        <constraint firstItem="oRo-Nd-gb3" firstAttribute="top" secondItem="MC8-bn-hfF" secondAttribute="top" constant="15" id="m5m-TQ-6nr"/>
                         <constraint firstAttribute="trailing" secondItem="LII-XQ-PUh" secondAttribute="trailing" id="mzL-wa-4H0"/>
                         <constraint firstAttribute="bottom" secondItem="LII-XQ-PUh" secondAttribute="bottom" constant="20" id="n31-ko-iWU"/>
+                        <constraint firstAttribute="trailing" secondItem="Zk1-gM-s4x" secondAttribute="trailing" constant="16" id="v4Z-ZW-WVD"/>
                     </constraints>
                 </view>
             </subviews>
@@ -100,7 +113,7 @@
                 <constraint firstItem="MC8-bn-hfF" firstAttribute="leading" secondItem="4x3-0v-VuG" secondAttribute="leading" constant="22" id="fW2-Lp-cOF"/>
                 <constraint firstItem="TRy-M4-nHN" firstAttribute="bottom" secondItem="e6u-Ll-Plj" secondAttribute="bottom" id="w19-zA-2na"/>
             </constraints>
-            <point key="canvasLocation" x="68" y="68.815592203898049"/>
+            <point key="canvasLocation" x="67.938931297709928" y="68.309859154929583"/>
         </view>
     </objects>
     <resources>

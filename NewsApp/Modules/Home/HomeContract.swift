@@ -12,6 +12,7 @@ protocol HomeView: AnyObject {
     var presenter: HomePresentation? { get set }
     
     func showError(message: String)
+    func showErrorSearch(isHidden: Bool)
     func showLoading()
     func hideLoading()
     func reloadTableView()
@@ -40,13 +41,12 @@ protocol HomePresentation: AnyObject {
     var category: String { get set }
     var categoryList: [Category] { get set }
     var selectedCategory: Category? { get set }
-    var searchText: String { get set }
     
     func viewDidLoad()
     func getNews()
     func navigateToDetail(data: News)
     func presentCategoryPicker()
-    func searchNews()
+    func searchNews(searchText: String)
 }
 
 protocol HomeInteractorOutput: AnyObject {

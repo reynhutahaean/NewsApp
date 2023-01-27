@@ -44,7 +44,7 @@ class DetailNewsViewController: BaseViewController {
         showLoading(self.webView)
         webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 30))
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [weak self] in
             guard let self else { return }
             self.hideLoading(self.webView)
         }

@@ -14,8 +14,10 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var newsTableView: UITableView!
+    @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var errorSearchNews: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,9 @@ class HomeViewController: BaseViewController {
     
     private func setupView() {
         headerView.dropShadow()
-        searchTextField.delegate = self
+        searchView.roundedCorner(cornerRadius: 10)
+        searchContainerView.isHidden = true
+        errorSearchNews.isHidden = true
     }
     
     private func setupTableView() {
@@ -36,12 +40,16 @@ class HomeViewController: BaseViewController {
         newsTableView.dataSource = self
     }
     
+    @IBAction func searchButtonTapped(_ sender: Any) {
+        searchContainerView.isHidden = !searchContainerView.isHidden
+    }
+    
     @IBAction func categoryButtonTapped(_ sender: Any) {
         presenter?.presentCategoryPicker()
     }
     
     @IBAction func searchTextFieldEditingChanged(_ sender: Any) {
-        presenter?.searchNews()
+        presenter?.searchNews(searchText: searchTextField.text ?? "")
     }
 }
 
@@ -50,6 +58,10 @@ extension HomeViewController: HomeView {
         print(message)
     }
 
+    func showErrorSearch(isHidden: Bool) {
+        errorSearchNews.isHidden = isHidden
+    }
+    
     func showLoading() {
         self.showLoading(self.view)
     }
@@ -69,14 +81,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let news = presenter?.topHeadlineArray else {
+            return UITableViewCell()
+        }
+        
         if indexPath.row == 0 {
             let cell = newsTableView.dequeueReusableCell(withIdentifier: "FirstTopHeadlinesTableViewCell", for: indexPath) as! FirstTopHeadlinesTableViewCell
-            cell.setData(topHeadlines: presenter?.topHeadlineArray[indexPath.row] ?? News())
+            cell.setData(news: news[indexPath.row])
+            
+            cell.selectionStyle = .none
             
             return cell
         } else {
             let cell = newsTableView.dequeueReusableCell(withIdentifier: "TopHeadlinesTableViewCell", for: indexPath) as! TopHeadlinesTableViewCell
-            cell.setData(topHeadlines: presenter?.topHeadlineArray[indexPath.row] ?? News())
+            cell.setData(news: news[indexPath.row])
+            
+            cell.selectionStyle = .none
             
             return cell
         }
@@ -96,20 +116,5 @@ extension HomeViewController: CategoryPickerPopUpDelegate {
             presenter?.getNews()
             newsTableView.reloadData()
         }
-    }
-}
-
-extension HomeViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == searchTextField {
-            if textField.text?.isEmpty ?? false {
-                presenter?.searchText = ""
-            } else {
-                presenter?.searchText = searchTextField.text ?? ""
-            }
-            return true
-        }
-        
-        return false
     }
 }

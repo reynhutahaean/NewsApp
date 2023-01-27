@@ -11,7 +11,7 @@ import AlamofireImage
 class FirstTopHeadlinesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var newsImageView: UIImageView!
-    @IBOutlet weak var newsSourceLabel: UILabel!
+    @IBOutlet weak var newsDateLabel: UILabel!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var newsAuthorLabel: UILabel!
     
@@ -26,17 +26,15 @@ class FirstTopHeadlinesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setData(topHeadlines: News) {
-        if topHeadlines.urlToImage?.prefix(4) == "http" || topHeadlines.urlToImage?.prefix(5) == "https" {
-            guard let urlString = topHeadlines.urlToImage?.replacingOccurrences(of: " ", with: "%20"), let url = URL(string: urlString) else { return }
+    func setData(news: News) {
+        if news.urlToImage?.prefix(4) == "http" || news.urlToImage?.prefix(5) == "https" {
+            guard let urlString = news.urlToImage?.replacingOccurrences(of: " ", with: "%20"), let url = URL(string: urlString) else { return }
             newsImageView.af_setImage(withURL: url)
         } else {
             newsImageView.af_setImage(withURL: URL(string: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg")!)
         }
-//        newsSourceLabel.text = topHeadlines.name
-        let newsLabel = topHeadlines.title
-        let index = newsLabel?.firstIndex(of: "-")
-        newsTitleLabel.text = String(newsLabel?[..<index!] ?? "")
-        newsAuthorLabel.text = topHeadlines.author
+        newsDateLabel.text = news.publishedAt?.getFormattedDate()
+        newsTitleLabel.text = news.title
+        newsAuthorLabel.text = news.author
     }
 }
