@@ -8,5 +8,6 @@ target 'NewsApp' do
   pod 'Alamofire'
   pod 'AlamofireImage'
   pod 'MBProgressHUD', '1.2.0'
+  pod 'IQKeyboardManagerSwift'
 
 end
