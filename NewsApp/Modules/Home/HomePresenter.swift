@@ -14,18 +14,21 @@ class HomePresenter {
     var interactor: HomeUseCase?
     var router: HomeWireFrame?
     
-    var topHeadlineArray: [News] = [News]()
+    var topHeadlineArray: [NewsModel] = [NewsModel]()
     var refreshControl: UIRefreshControl = UIRefreshControl()
-    var category: String = "general"
-    var categoryList: [Category] = [Category(id: "business"),
-                                    Category(id: "entertainment"),
-                                    Category(id: "general"),
-                                    Category(id: "health"),
-                                    Category(id: "science"),
-                                    Category(id: "sports"),
-                                    Category(id: "technology")]
-    var selectedCategory: Category?
+    var category: String = CategoryType.general.rawValue
+    var categoryList: [CategoryType] = [
+        .business,
+        .entertainment,
+        .general,
+        .health,
+        .science,
+        .sports,
+        .technology
+    ]
+    var selectedCategory: CategoryType?
     var searchText: String = ""
+    var pageSize: Int = 100
     
     private var model: HomeModel?
 }
@@ -38,18 +41,19 @@ extension HomePresenter: HomePresentation {
     func getNews() {
         var param: [String: Any] = [String: Any]()
         param["category"] = category
+        param["pageSize"] = pageSize
         view?.showLoading()
         interactor?.getNews(param: param)
-    }   
+    }
     
-    func navigateToDetail(data: News) {
+    func navigateToDetail(data: NewsModel) {
         var param: [String: Any] = [String: Any]()
         param["news"] = data
         router?.navigateToDetail(data: param)
     }
     
     func presentCategoryPicker() {
-        let categoryName = categoryList.map { $0.id }
+        let categoryName = categoryList.map { $0.rawValue }
         router?.presentCategoryPicker(categoryName: categoryName, categoryList: categoryList)
     }
     
@@ -73,15 +77,15 @@ extension HomePresenter: HomePresentation {
 }
 
 extension HomePresenter: HomeInteractorOutput {
-    func successGetNews(data: [News]) {
+    func successGetNews(data: [NewsModel]) {
         view?.hideLoading()
-        topHeadlineArray = data
+        topHeadlineArray.append(contentsOf: data)
         model = HomeModel(news: data)
         view?.reloadTableView()
     }
     
     func errorGetNews(message: String) {
         view?.hideLoading()
-        view?.showError(message: message)
+        view?.showAlert(message: message)
     }
 }

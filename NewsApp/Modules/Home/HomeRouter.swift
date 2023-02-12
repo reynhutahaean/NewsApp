@@ -36,7 +36,7 @@ extension HomeRouter: HomeWireFrame {
         viewController.present(detailView, animated: true)
     }
     
-    func presentCategoryPicker(categoryName: [String], categoryList: [Category]) {
+    func presentCategoryPicker(categoryName: [String], categoryList: [CategoryType]) {
         guard let viewController = viewController else { return }
         let vc = CategoryPickerViewController()
         vc.delegate = viewController

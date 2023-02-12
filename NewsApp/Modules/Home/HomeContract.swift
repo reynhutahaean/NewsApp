@@ -11,11 +11,11 @@ import UIKit
 protocol HomeView: AnyObject {
     var presenter: HomePresentation? { get set }
     
-    func showError(message: String)
     func showErrorSearch(isHidden: Bool)
     func showLoading()
     func hideLoading()
     func reloadTableView()
+    func showAlert(message: String)
 }
 
 protocol HomeUseCase: AnyObject {
@@ -28,7 +28,7 @@ protocol HomeWireFrame: AnyObject {
     func createModule(data: [String: Any]?) -> BaseViewController
     
     func navigateToDetail(data: [String: Any])
-    func presentCategoryPicker(categoryName: [String], categoryList: [Category])
+    func presentCategoryPicker(categoryName: [String], categoryList: [CategoryType])
 }
 
 protocol HomePresentation: AnyObject {
@@ -36,20 +36,21 @@ protocol HomePresentation: AnyObject {
     var interactor: HomeUseCase? { get set }
     var router: HomeWireFrame? { get set }
     
-    var topHeadlineArray: [News] { get set }
+    var topHeadlineArray: [NewsModel] { get set }
     var refreshControl: UIRefreshControl { get set }
     var category: String { get set }
-    var categoryList: [Category] { get set }
-    var selectedCategory: Category? { get set }
+    var categoryList: [CategoryType] { get set }
+    var selectedCategory: CategoryType? { get set }
+    var pageSize: Int { get set }
     
     func viewDidLoad()
     func getNews()
-    func navigateToDetail(data: News)
+    func navigateToDetail(data: NewsModel)
     func presentCategoryPicker()
     func searchNews(searchText: String)
 }
 
 protocol HomeInteractorOutput: AnyObject {
-    func successGetNews(data: [News])
+    func successGetNews(data: [NewsModel])
     func errorGetNews(message: String)
 }

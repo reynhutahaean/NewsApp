@@ -11,30 +11,19 @@ import Alamofire
 class HomeInteractor {
     
     weak var presenter: HomeInteractorOutput?
+    
+    private let service: APIController = APIRepo()
 }
 
 extension HomeInteractor: HomeUseCase {
     
     func getNews(param: [String : Any]) {
-        let headers : HTTPHeaders = ["Content-Type": "application/json",
-                       "X-Api-Key": Constant.apiKey]
-        
-        Alamofire.request("\(Constant.baseURL)\(Constant().topHeadline)", method: .get, parameters: param, encoding: URLEncoding.default, headers: headers).responseJSON { [weak self] response in
-            
-            if(response.response?.statusCode == 200){
-                guard let data = response.data else { return }
-                do {
-                    let decoder = JSONDecoder()
-                    let newsResponse = try decoder.decode(NewsResponse.self, from: data)
-                    guard let articles = newsResponse.articles else { return }
-                    self?.presenter?.successGetNews(data: articles)
-                } catch let error {
-                    print(error)
-                }
+        service.getHomeNews(param: param) { [weak self] response in
+            if let data = response?.articles {
+                self?.presenter?.successGetNews(data: data)
             }
-            else {
-                self?.presenter?.errorGetNews(message: response.result.error?.localizedDescription ?? "")
-            }
+        } errorBlock: { [weak self] error in
+            self?.presenter?.errorGetNews(message: error)
         }
     }
 }

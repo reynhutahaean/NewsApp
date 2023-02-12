@@ -8,10 +8,10 @@
 import Foundation
 
 struct HomeModel {
-    var news: [News]
+    var news: [NewsModel]
 }
 
-struct News: Codable {
+struct NewsModel: Codable {
     var id: String?
     var name: String?
     var author: String?
@@ -35,6 +35,12 @@ struct News: Codable {
     }
 }
 
-struct Category {
-    let id : String
+enum CategoryType: String {
+    case business
+    case entertainment
+    case general
+    case health
+    case science
+    case sports
+    case technology
 }

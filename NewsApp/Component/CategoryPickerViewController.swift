@@ -21,7 +21,7 @@ class CategoryPickerViewController: UIViewController {
     
     var delegate: CategoryPickerPopUpDelegate?
     var pickerArray = [String]()
-    var categoryArray = [Category]()
+    var categoryArray = [CategoryType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +48,10 @@ class CategoryPickerViewController: UIViewController {
     
     @IBAction func searchTextFieldEditingChanged(_ sender: Any) {
         if (searchTextField.text == "") {
-            pickerArray = categoryArray.map { $0.id }
+            pickerArray = categoryArray.map { $0.rawValue }
         } else {
-            let filteredCountry = categoryArray.filter { $0.id.contains(searchTextField.text!) }
-            pickerArray = filteredCountry.map { $0.id }
+            let filteredCountry = categoryArray.filter { $0.rawValue.contains(searchTextField.text!) }
+            pickerArray = filteredCountry.map { $0.rawValue }
         }
 
         tableView.reloadData()

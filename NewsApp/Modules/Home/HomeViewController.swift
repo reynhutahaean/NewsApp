@@ -54,10 +54,12 @@ class HomeViewController: BaseViewController {
 }
 
 extension HomeViewController: HomeView {
-    func showError(message: String) {
-        print(message)
+    func showAlert(message: String) {
+        DispatchQueue.main.async {
+            self.showAlertView(message: message)
+        }
     }
-
+    
     func showErrorSearch(isHidden: Bool) {
         errorSearchNews.isHidden = isHidden
     }
@@ -81,21 +83,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let news = presenter?.topHeadlineArray else {
-            return UITableViewCell()
-        }
+        guard let news = presenter?.topHeadlineArray else { return UITableViewCell() }
         
         if indexPath.row == 0 {
             let cell = newsTableView.dequeueReusableCell(withIdentifier: "FirstTopHeadlinesTableViewCell", for: indexPath) as! FirstTopHeadlinesTableViewCell
             cell.setData(news: news[indexPath.row])
-            
+
             cell.selectionStyle = .none
-            
+
             return cell
         } else {
             let cell = newsTableView.dequeueReusableCell(withIdentifier: "TopHeadlinesTableViewCell", for: indexPath) as! TopHeadlinesTableViewCell
-            cell.setData(news: news[indexPath.row])
-            
+
             cell.selectionStyle = .none
             
             return cell
@@ -106,15 +105,24 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let news = presenter?.topHeadlineArray else { return }
         presenter?.navigateToDetail(data: news[indexPath.row])
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (presenter?.topHeadlineArray.count ?? 0) - 1 {
+            presenter?.getNews()
+            DispatchQueue.main.async {
+                let lastListIndexPath = IndexPath(row: (self.presenter?.topHeadlineArray.count ?? 0) - 1, section: 0)
+                self.newsTableView.scrollToRow(at: lastListIndexPath, at: .bottom, animated: true)
+            }
+        }
+    }
 }
 
 extension HomeViewController: CategoryPickerPopUpDelegate {
     func selectPicker(categoryName: String) {
-        if let categories = presenter?.categoryList.first(where: { $0.id == categoryName }){
+        if let categories = presenter?.categoryList.first(where: { $0.rawValue == categoryName }){
             presenter?.selectedCategory = categories
-            presenter?.category = categoryName
+            presenter?.category = categoryName.lowercased()
             presenter?.getNews()
-            newsTableView.reloadData()
         }
     }
 }
