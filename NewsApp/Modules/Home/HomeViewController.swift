@@ -94,6 +94,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = newsTableView.dequeueReusableCell(withIdentifier: "TopHeadlinesTableViewCell", for: indexPath) as! TopHeadlinesTableViewCell
+            cell.setData(news: news[indexPath.row])
 
             cell.selectionStyle = .none
             
