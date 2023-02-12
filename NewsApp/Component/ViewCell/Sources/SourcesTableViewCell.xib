@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
+        </array>
+        <array key="SF-Pro-Rounded-Regular.otf">
+            <string>SFProRounded-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="137" id="K6L-3P-LjW" customClass="SourcesTableViewCell" customModule="NewsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="137"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6L-3P-LjW" id="Tth-oF-gPQ">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="137"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PwW-Sr-8Zt">
+                        <rect key="frame" x="20" y="10" width="374" height="117"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eb1-6l-mKD">
+                                <rect key="frame" x="10" y="65" width="354" height="42"/>
+                                <string key="text">Video released by the Raleigh Police Department shows the arrest of Darryl Williams, who was shocked three times with a Taser and later died. WRAL’s Chelsea</string>
+                                <fontDescription key="fontDescription" name="SFProRounded-Regular" family="SF Pro Rounded" pointSize="12"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ardaam" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRV-5w-Nef">
+                                <rect key="frame" x="10" y="10.000000000000002" width="354" height="22.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngc-vp-Ch3">
+                                <rect key="frame" x="10" y="37.666666666666664" width="354" height="12"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="8"/>
+                                <color key="textColor" red="0.99215686270000003" green="0.2274509804" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eb1-6l-mKD" firstAttribute="leading" secondItem="PwW-Sr-8Zt" secondAttribute="leading" constant="10" id="DyH-iy-o2a"/>
+                            <constraint firstItem="eb1-6l-mKD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ngc-vp-Ch3" secondAttribute="bottom" constant="15.33" id="KED-6N-6jK"/>
+                            <constraint firstAttribute="trailing" secondItem="Ngc-vp-Ch3" secondAttribute="trailing" constant="10" id="KhX-3b-Iha"/>
+                            <constraint firstItem="Ngc-vp-Ch3" firstAttribute="top" secondItem="aRV-5w-Nef" secondAttribute="bottom" constant="5" id="NJf-h7-dLe"/>
+                            <constraint firstItem="aRV-5w-Nef" firstAttribute="top" secondItem="PwW-Sr-8Zt" secondAttribute="top" constant="10" id="Rho-mI-yhy"/>
+                            <constraint firstAttribute="bottom" secondItem="eb1-6l-mKD" secondAttribute="bottom" constant="10" id="Yrs-K7-9Ef"/>
+                            <constraint firstAttribute="trailing" secondItem="eb1-6l-mKD" secondAttribute="trailing" constant="10" id="Zet-kp-APA"/>
+                            <constraint firstAttribute="trailing" secondItem="aRV-5w-Nef" secondAttribute="trailing" constant="10" id="dHG-ac-Jfl"/>
+                            <constraint firstItem="aRV-5w-Nef" firstAttribute="leading" secondItem="PwW-Sr-8Zt" secondAttribute="leading" constant="10" id="qWp-cO-1cw"/>
+                            <constraint firstItem="Ngc-vp-Ch3" firstAttribute="leading" secondItem="PwW-Sr-8Zt" secondAttribute="leading" constant="10" id="wOP-Xh-jAu"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.93359775739999995" green="0.93359775739999995" blue="0.93359775739999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="PwW-Sr-8Zt" secondAttribute="trailing" constant="20" id="6yl-qi-SHG"/>
+                    <constraint firstAttribute="bottom" secondItem="PwW-Sr-8Zt" secondAttribute="bottom" constant="10" id="QGV-LX-PLG"/>
+                    <constraint firstItem="PwW-Sr-8Zt" firstAttribute="leading" secondItem="Tth-oF-gPQ" secondAttribute="leading" constant="20" id="c9r-f4-Kr4"/>
+                    <constraint firstItem="PwW-Sr-8Zt" firstAttribute="top" secondItem="Tth-oF-gPQ" secondAttribute="top" constant="10" id="vrQ-Hb-doH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="GoI-3l-E97"/>
+            <connections>
+                <outlet property="categoryNewsLabel" destination="Ngc-vp-Ch3" id="d8g-XH-km0"/>
+                <outlet property="descriptionNewsLabel" destination="eb1-6l-mKD" id="5af-Vc-W6M"/>
+                <outlet property="newsNameLabel" destination="aRV-5w-Nef" id="mlA-DC-GO7"/>
+                <outlet property="newsView" destination="PwW-Sr-8Zt" id="s8R-rk-wj4"/>
+            </connections>
+            <point key="canvasLocation" x="44.274809160305338" y="95.422535211267615"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
